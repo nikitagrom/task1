@@ -5,7 +5,7 @@ window.addEventListener('load',function(){
         startNewGame();
     })
 });
-
+var counter = 1;
 function startNewGame() {
 
     var array = document.querySelectorAll('.cell');
@@ -15,21 +15,21 @@ function startNewGame() {
         array[i].classList.remove('o')
     }
 
-
+removeEventListeners(array)
     function eListener() {
 
-        if (2 % 2 == 0) {
+        if (counter % 2 !== 0) {
 
             if (!this.classList.contains('x') && !this.classList.contains('o')) {
                 this.classList.add('x')
-
+counter++;
             }
 
         }
         else {
             if (!this.classList.contains('o') && !this.classList.contains('x')) {
                 this.classList.add('o')
-
+counter++;
             }
         }
     }
@@ -51,10 +51,11 @@ function startNewGame() {
   var body = document.querySelector('body');
     body.addEventListener('click',function e(event){
         if(getWinner()){
-            alert("winner is "+getWinner())
-            removeEventListeners(array)
-            this.removeEventListener('click',e)
+            alert("winner is "+getWinner());
+            removeEventListeners(array);
+            this.removeEventListener('click',e);
 
+        counter = 1;
         }
         event.stopPropagation();
     })
